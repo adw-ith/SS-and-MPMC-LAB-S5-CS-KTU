@@ -1,0 +1,133 @@
+NAME    : ADWAITH RAJ
+CLASS   : S5 CS
+ROLL NO : 5
+
+EXPERIMENT NO - 14
+SORTING OF AN ARRAY
+
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:20:39
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT  
+ 0000  0A 0D 45 4E 54 45 52	  MSG1 DB 0AH,0DH,"ENTER NUMBER OF ELEMENTS:$" 
+       20 4E 55 4D 42 45 52	
+       20 4F 46 20 45 4C 45	
+       4D 45 4E 54 53 3A 24	
+ 001C  0A 0D 45 4E 54 45 52	  MSG2 DB 0AH,0DH,"ENTER ELEMENTS:$" 
+       20 45 4C 45 4D 45 4E	
+       54 53 3A 24		
+ 002E  0A 0D 53 4F 52 54 45	  MSG3 DB 0AH,0DH,"SORTED ARRAY IS:$" 
+       44 20 41 52 52 41 59	
+       20 49 53 3A 24		
+ 0041  ??			  N DB ? 
+ 0042  0009[			  LIST1 DB 09H DUP(?) 
+	    ??			
+			 ]	
+				
+				   
+ 004B				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START: 
+ 0000  B8 ---- R		          MOV AX,DATA 
+ 0003  8E D8			          MOV DS,AX 
+ 0005  8D 16 0000 R		   	      LEA DX,MSG1 
+ 0009  B4 09				      MOV AH,09H 
+ 000B  CD 21				      INT 21H 
+ 000D  B4 01				      MOV AH,01H 
+ 000F  CD 21				      INT 21H 
+ 0011  2C 30				      SUB AL,30H 
+ 0013  A2 0041 R			      MOV N,AL 
+ 0016  8A 0E 0041 R			      MOV CL,N 
+ 001A  BE 0042 R			      MOV SI,OFFSET LIST1 
+ 001D  8D 16 001C R		          LEA DX,MSG2 
+ 0021  B4 09				      MOV AH,09H 
+ 0023  CD 21				      INT 21H 
+ 0025  B4 01			READ:     MOV AH,01H 
+ 0027  CD 21				      INT 21H 
+ 0029  2C 30				      SUB AL,30H 
+ 002B  88 04				      MOV [SI],AL 
+ 002D  46				      INC SI 
+ 002E  FE C9				      DEC CL 
+ 0030  75 F3				      JNZ READ 
+ 0032  8A 0E 0041 R			      MOV CL,N 
+ 0036  8A 2E 0041 R		LOOP1:    MOV CH,N   
+ 003A  BE 0042 R		          MOV SI,OFFSET LIST1 
+ 003D  8A 14			LOOP2:    MOV DL,[SI]           
+ 003F  3A 54 01			          CMP DL,[SI+1] 
+ 0042  73 03			          JNC SWAP 
+ 0044  EB 08 90			          JMP SWAPPED 
+ 0047  8A 14			SWAP:     MOV DL,[SI] 
+ 0049  86 54 01			          XCHG DL,[SI+1] 
+ 004C  88 14			          MOV [SI],DL 
+ 004E  46			SWAPPED:  INC SI 
+ 004F  FE CD			          DEC CH 
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:20:39
+                                                             Page     1-2
+
+
+ 0051  75 EA			          JNZ LOOP2 
+ 0053  FE C9			          DEC CL 
+ 0055  75 DF			          JNZ LOOP1 
+ 0057  8D 16 002E R		          LEA DX,MSG3 
+ 005B  B4 09				      MOV AH,09H 
+ 005D  CD 21				      INT 21H 
+ 005F  BE 0042 R			      MOV SI,OFFSET LIST1 
+ 0062  8A 0E 0041 R			      MOV CL,N 
+ 0066  46				      INC SI 
+ 0067  8A 14			PRINT:    MOV DL,[SI] 
+ 0069  80 C2 30			          ADD DL,30H 
+ 006C  B4 02			          MOV AH,02H 
+ 006E  CD 21			          INT 21H 
+ 0070  46			          INC SI 
+ 0071  FE C9			          DEC CL 
+ 0073  75 F2			          JNZ PRINT 
+ 0075  B4 4C			          MOV AH,4CH 
+ 0077  CD 21			          INT 21H 
+ 0079				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:20:39
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0079	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	004B	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+LIST1  . . . . . . . . . . . . .  	L BYTE	0042	DATA	Length = 0009
+LOOP1  . . . . . . . . . . . . .  	L NEAR	0036	CODE
+LOOP2  . . . . . . . . . . . . .  	L NEAR	003D	CODE
+
+MSG1 . . . . . . . . . . . . . .  	L BYTE	0000	DATA
+MSG2 . . . . . . . . . . . . . .  	L BYTE	001C	DATA
+MSG3 . . . . . . . . . . . . . .  	L BYTE	002E	DATA
+
+N  . . . . . . . . . . . . . . .  	L BYTE	0041	DATA
+
+PRINT  . . . . . . . . . . . . .  	L NEAR	0067	CODE
+
+READ . . . . . . . . . . . . . .  	L NEAR	0025	CODE
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+SWAP . . . . . . . . . . . . . .  	L NEAR	0047	CODE
+SWAPPED  . . . . . . . . . . . .  	L NEAR	004E	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  sort		
+
+
+     64 Source  Lines
+     64 Total   Lines
+     16 Symbols
+
+  51060 + 465484 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

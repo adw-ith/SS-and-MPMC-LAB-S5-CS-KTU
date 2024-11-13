@@ -1,0 +1,66 @@
+NAME    : ADWAITH RAJ
+CLASS   : S5 CS
+ROLL NO : 5
+
+EXPERIMENT NO - 10
+MULTIPLICATION OF 2 16-BIT NUMBERS
+
+Microsoft (R) Macro Assembler Version 5.00                  8/27/24 10:38:44
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT 
+ 0000  ABCD			       NUM1 DW 0ABCDH 
+ 0002  1D7C			       NUM2 DW 01D7CH 
+ 0004  ????			       RESULT1 DW ? 
+ 0006  ????			       RESULT2 DW ? 
+ 0008				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START:  
+ 0000  B8 ---- R		       MOV AX,DATA 
+ 0003  8E D8			       MOV DS,AX 
+ 0005  A1 0000 R		       MOV AX,NUM1 
+ 0008  8B 1E 0002 R		       MOV BX,NUM2 
+ 000C  F7 E3			       MUL BX 
+ 000E  A3 0004 R		       MOV RESULT1,AX 
+ 0011  89 16 0006 R		       MOV RESULT2,DX 
+ 0015  B4 4C			       MOV AH, 4CH 
+ 0017  CD 21			       INT 21H 
+				        
+ 0019				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  8/27/24 10:38:44
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0019	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	0008	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+NUM1 . . . . . . . . . . . . . .  	L WORD	0000	DATA
+NUM2 . . . . . . . . . . . . . .  	L WORD	0002	DATA
+
+RESULT1  . . . . . . . . . . . .  	L WORD	0004	DATA
+RESULT2  . . . . . . . . . . . .  	L WORD	0006	DATA
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  mult		
+
+
+     21 Source  Lines
+     21 Total   Lines
+      9 Symbols
+
+  51218 + 465326 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

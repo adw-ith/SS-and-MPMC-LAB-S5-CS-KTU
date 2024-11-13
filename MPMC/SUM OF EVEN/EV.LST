@@ -1,0 +1,132 @@
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:12:37
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT  
+ 0000  0A 0D 45 4E 54 45 52	  MSG1 DB 0AH,0DH,"ENTER NUMBER OF ELEMENTS:$" 
+       20 4E 55 4D 42 45 52	
+       20 4F 46 20 45 4C 45	
+       4D 45 4E 54 53 3A 24	
+ 001C  0A 0D 45 4E 54 45 52	  MSG2 DB 0AH,0DH,"ENTER ELEMENTS:$" 
+       20 45 4C 45 4D 45 4E	
+       54 53 3A 24		
+ 002E  0A 0D 53 55 4D 20 4F	  MSG3 DB 0AH,0DH,"SUM OF EVEN NUMBERS IS:$" 
+       46 20 45 56 45 4E 20	
+       4E 55 4D 42 45 52 53	
+       20 49 53 3A 24		
+ 0048  0009[			  LIST1 DB 09H DUP(?) 
+	    ??			
+			 ]	
+				
+ 0051  0006[			  NUMBUFFER DB 6 DUP('$') 
+	   24			
+			 ]	
+				
+ 0057  ??			  N DB ? 
+ 0058  ??			  SUM DB ? 
+				  
+ 0059				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START: 
+ 0000  B8 ---- R		          MOV AX,DATA 
+ 0003  8E D8			          MOV DS,AX 
+ 0005  8D 16 0000 R		   	      LEA DX,MSG1 
+ 0009  B4 09				      MOV AH,09H 
+ 000B  CD 21				      INT 21H 
+ 000D  B4 01				      MOV AH,01H 
+ 000F  CD 21				      INT 21H 
+ 0011  2C 30				      SUB AL,30H 
+ 0013  A2 0057 R			      MOV N,AL 
+ 0016  8A 0E 0057 R			      MOV CL,N 
+ 001A  BE 0048 R			      MOV SI,OFFSET LIST1 
+ 001D  8D 16 001C R			      LEA DX,MSG2 
+ 0021  B4 09				      MOV AH,09H 
+ 0023  CD 21				      INT 21H 
+ 0025  B4 01			READ:     MOV AH,01H 
+ 0027  CD 21				      INT 21H 
+ 0029  2C 30				      SUB AL,30H 
+ 002B  88 04				      MOV [SI],AL 
+ 002D  46				      INC SI 
+ 002E  FE C9				      DEC CL 
+ 0030  75 F3				      JNZ READ 
+ 0032  8A 0E 0057 R			      MOV CL,N 
+ 0036  BE 0048 R			      MOV SI,OFFSET LIST1 
+ 0039  C6 06 0058 R 00			      MOV SUM,00H 
+ 003E  8A 04			LOOP1:    MOV AL,[SI] 
+ 0040  A8 01					  TEST AL,01H 
+ 0042  74 03					  JZ EVENIS 
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:12:37
+                                                             Page     1-2
+
+
+ 0044  EB 05 90					  JMP NOT_EVEN 
+ 0047  00 06 0058 R		EVENIS:   ADD SUM,AL 
+ 004B  46			NOT_EVEN: INC SI 
+ 004C  E2 F0			          LOOP LOOP1 
+ 004E  8D 16 002E R		PRINT:    LEA DX,MSG3 
+ 0052  B4 09			          MOV AH,09H 
+ 0054  CD 21			          INT 21H 
+ 0056  A0 0058 R		          MOV AL,SUM 
+ 0059  B3 0A			          MOV BL,10 
+ 005B  B7 00			          MOV BH,0 
+ 005D  B4 00			          MOV AH,0 
+ 005F  F6 F3			          DIV BL 
+ 0061  04 30			          ADD AL,'0' 
+ 0063  A2 0051 R		          MOV [NUMBUFFER],AL 
+ 0066  8A D4			          MOV DL,AH 
+ 0068  80 C2 30			          ADD DL,'0' 
+ 006B  88 16 0052 R		          MOV [NUMBUFFER+1],DL 
+ 006F  8D 16 0051 R		          LEA DX,NUMBUFFER 
+ 0073  B4 09			          MOV AH,09H 
+ 0075  CD 21			          INT 21H 
+ 0077  B4 4C			          MOV AH,4CH 
+ 0079  CD 21			          INT 21H 
+ 007B				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:12:37
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	007B	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	0059	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+EVENIS . . . . . . . . . . . . .  	L NEAR	0047	CODE
+
+LIST1  . . . . . . . . . . . . .  	L BYTE	0048	DATA	Length = 0009
+LOOP1  . . . . . . . . . . . . .  	L NEAR	003E	CODE
+
+MSG1 . . . . . . . . . . . . . .  	L BYTE	0000	DATA
+MSG2 . . . . . . . . . . . . . .  	L BYTE	001C	DATA
+MSG3 . . . . . . . . . . . . . .  	L BYTE	002E	DATA
+
+N  . . . . . . . . . . . . . . .  	L BYTE	0057	DATA
+NOT_EVEN . . . . . . . . . . . .  	L NEAR	004B	CODE
+NUMBUFFER  . . . . . . . . . . .  	L BYTE	0051	DATA	Length = 0006
+
+PRINT  . . . . . . . . . . . . .  	L NEAR	004E	CODE
+
+READ . . . . . . . . . . . . . .  	L NEAR	0025	CODE
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+SUM  . . . . . . . . . . . . . .  	L BYTE	0058	DATA
+
+@FILENAME  . . . . . . . . . . .  	TEXT  ev		
+
+
+     64 Source  Lines
+     64 Total   Lines
+     17 Symbols
+
+  51112 + 465432 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

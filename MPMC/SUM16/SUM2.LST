@@ -1,0 +1,68 @@
+NAME    : ADWAITH RAJ
+CLASS   : S5 CS
+ROLL NO : 5
+
+EXPERIMENT NO - 8
+ADDITION OF TWO 16-BIT NUMBERS
+
+
+Microsoft (R) Macro Assembler Version 5.00                  8/23/24 14:53:27
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT 
+ 0000  A425			       NUM1 DW 0A425H 
+ 0002  FE67			       NUM2 DW 0FE67H 
+ 0004  ????			       RESULT DW ? 
+ 0006  00			       CARRY DB 00H 
+ 0007				DATA ENDS 
+				 
+ 0000				CODE SEGMENT 
+ 0000				START:  
+ 0000  B8 ---- R		       MOV AX,DATA 
+ 0003  8E D8			       MOV DS,AX 
+ 0005  A1 0000 R		       MOV AX,NUM1 
+ 0008  03 06 0002 R		       ADD AX,NUM2 
+ 000C  80 16 0006 R 00		       ADC CARRY,00H 
+ 0011  A3 0004 R		       MOV RESULT,AX 
+ 0014  B4 4C			       MOV AH, 4CH 
+ 0016  CD 21			       INT 21H 
+				        
+ 0018				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  8/23/24 14:53:27
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0018	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	0007	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+CARRY  . . . . . . . . . . . . .  	L BYTE	0006	DATA
+
+NUM1 . . . . . . . . . . . . . .  	L WORD	0000	DATA
+NUM2 . . . . . . . . . . . . . .  	L WORD	0002	DATA
+
+RESULT . . . . . . . . . . . . .  	L WORD	0004	DATA
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  sum16two		
+
+
+     21 Source  Lines
+     21 Total   Lines
+      9 Symbols
+
+  51194 + 465350 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

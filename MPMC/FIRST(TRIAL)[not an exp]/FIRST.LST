@@ -1,0 +1,113 @@
+ADWAITH RAJ
+S5 CS
+ROLL NO. 5 
+
+ADDITION OF TWO 8-BIT NUMBERS
+
+
+Microsoft (R) Macro Assembler Version 5.00                  8/21/24 10:57:41
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT 
+ 0000  0A 0D 45 6E 74 65 72		num1 DB 0AH,0DH,"Enter First Number : $
+				" 
+       20 46 69 72 73 74 20	
+       4E 75 6D 62 65 72 20	
+       3A 20 24			
+ 0018  0A 0D 45 6E 74 65 72		num2 DB 0AH,0DH,"Enter Second Number : 
+				$" 
+       20 53 65 63 6F 6E 64	
+       20 4E 75 6D 62 65 72	
+       20 3A 20 24		
+ 0031  0A 0D 53 75 6D 20 3A		sum DB 0AH,0DH , "Sum : $" 
+       20 24			
+ 003A				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START: 
+ 0000  B8 ---- R			MOV AX,DATA 
+ 0003  8E D8				MOV DS,AX 
+					 
+ 0005  8D 16 0000 R			LEA DX,num1 
+ 0009  B4 09				MOV AH,09H 
+ 000B  CD 21				INT 21H 
+ 000D  B4 01				MOV AH,01H 
+ 000F  CD 21				INT 21H 
+ 0011  8A F8				MOV BH,AL 
+ 0013  B4 01				MOV AH,01H 
+ 0015  CD 21				INT 21H 
+ 0017  8A D8				MOV BL,AL 
+ 0019  8D 16 0018 R			LEA DX,num2 
+ 001D  B4 09				MOV AH,09H 
+ 001F  CD 21				INT 21H 
+ 0021  B4 01				MOV AH,01H 
+ 0023  CD 21				INT 21H 
+ 0025  8A E8				MOV CH,AL 
+ 0027  B4 01				MOV AH,01H 
+ 0029  CD 21				INT 21H 
+ 002B  8A C8				MOV CL,AL 
+ 002D  B4 00				MOV AH,00H 
+ 002F  8A C3				MOV AL,BL 
+ 0031  02 C1				ADD AL,CL 
+ 0033  37				AAA 
+ 0034  05 3030				ADD AX,3030H 
+ 0037  8A D8				MOV BL,AL 
+ 0039  8A C4				MOV AL,AH 
+ 003B  B4 00				MOV AH,00H 
+ 003D  02 C7				ADD AL,BH 
+ 003F  02 C5				ADD AL,CH 
+ 0041  37				AAA 
+ 0042  05 3030				ADD AX,3030H 
+ 0045  8A F8				MOV BH,AL 
+ 0047  8A CC				MOV CL,AH 
+ 0049  8D 16 0031 R			LEA DX,sum 
+ 004D  B4 09				MOV AH,09H 
+Microsoft (R) Macro Assembler Version 5.00                  8/21/24 10:57:41
+                                                             Page     1-2
+
+
+ 004F  CD 21				INT 21H 
+				 
+ 0051  8A D7				MOV DL,BH 
+ 0053  B4 02				MOV AH,02H 
+ 0055  CD 21				INT 21H	 
+ 0057  8A D3				MOV DL,BL 
+ 0059  B4 02				MOV AH,02H 
+ 005B  CD 21				INT 21H	 
+ 005D  B4 4C				MOV AH,4CH 
+ 005F  CD 21				INT 21H 
+ 0061				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  8/21/24 10:57:41
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0061	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	003A	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+NUM1 . . . . . . . . . . . . . .  	L BYTE	0000	DATA
+NUM2 . . . . . . . . . . . . . .  	L BYTE	0018	DATA
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+SUM  . . . . . . . . . . . . . .  	L BYTE	0031	DATA
+
+@FILENAME  . . . . . . . . . . .  	TEXT  first		
+
+
+     57 Source  Lines
+     57 Total   Lines
+      8 Symbols
+
+  51214 + 465330 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

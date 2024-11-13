@@ -1,0 +1,127 @@
+NAME    : ADWAITH RAJ
+CLASS   : S5 CS
+ROLL NO : 5
+
+EXPERIMENT NO - 15
+COUNT OF UPPERCASE AND LOWERCASE LETTERS IN A STRING
+
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:36:44
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT  
+ 0000  0A 0D 45 4E 54 45 52	  MSG1 DB 0AH,0DH,"ENTER STRING:$" 
+       20 53 54 52 49 4E 47	
+       3A 24			
+ 0010  55 50 50 45 52 43 41	  MSG2 DB "UPPERCASE LETTERS:$" 
+       53 45 20 4C 45 54 54	
+       45 52 53 3A 24		
+ 0023  4C 4F 57 45 52 43 41	  MSG3 DB "LOWERCASE LETTERS:$" 
+       53 45 20 4C 45 54 54	
+       45 52 53 3A 24		
+ 0036  FF			  BUFFER DB 255 
+ 0037  ??			  UPPERCOUNT DB ? 
+ 0038  ??			  LOWERCOUNT DB ?   
+ 0039				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START: 
+ 0000  B8 ---- R		         	 MOV AX,DATA 
+ 0003  8E D8			         	 MOV DS,AX 
+ 0005  8D 16 0000 R		   	     	 LEA DX,MSG1 
+ 0009  B4 09				     	 MOV AH,09H 
+ 000B  CD 21				     	 INT 21H 
+ 000D  B4 0A				     	 MOV AH,0AH 
+ 000F  8D 16 0036 R			     	 LEA DX,BUFFER 
+ 0013  CD 21				     	 INT 21H 
+ 0015  33 C9				     	 XOR CX,CX 
+ 0017  8A 0E 0037 R			     	 MOV CL,[BUFFER+1] 
+ 001B  33 DB				         XOR BX,BX 
+ 001D  BA 0000				         MOV DX,0000H 
+ 0020  8A 87 0038 R		LOOP1:    	 MOV AL,[BUFFER+2+BX] 
+ 0024  3C 61			          	 CMP AL,'a' 
+ 0026  72 09			         	 JB CHECK_UPPER 
+ 0028  3C 7A			     	     CMP AL,'z' 
+ 002A  77 05				         JA CHECK_UPPER 
+ 002C  FE C2			             INC DL 
+ 002E  EB 0B 90			             JMP NEXT 
+ 0031  3C 41			CHECK_UPPER: CMP AL,'A' 
+ 0033  72 06			             JB NEXT 
+ 0035  3C 5A			             CMP AL,'Z' 
+ 0037  77 02			             JA NEXT 
+ 0039  FE C6			             INC DH 
+ 003B  43			NEXT:        INC BX 
+ 003C  E2 E2						 LOOP LOOP1 
+ 003E  88 36 0037 R					 MOV UPPERCOUNT,DH 
+ 0042  88 16 0038 R					 MOV LOWERCOUNT,DL 
+ 0046  BA 0010 R					 MOV DX,OFFSET MSG2 
+ 0049  B4 09			             MOV AH,09H 
+ 004B  CD 21			             INT 21H 
+ 004D  A0 0037 R		             MOV AL,UPPERCOUNT 
+ 0050  04 30			             ADD AL,'0' 
+ 0052  8A D0			             MOV DL,AL 
+ 0054  B4 02			             MOV AH,02H 
+ 0056  CD 21			             INT 21H 
+ 0058  BA 0023 R		             MOV DX,OFFSET MSG3 
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:36:44
+                                                             Page     1-2
+
+
+ 005B  B4 09			             MOV AH,09H 
+ 005D  CD 21			             INT 21H 
+ 005F  A0 0038 R		             MOV AL,LOWERCOUNT 
+ 0062  EB 01 90			             JMP PRINT 
+ 0065  04 30			PRINT:       ADD AL,'0' 
+ 0067  8A D0			             MOV DL,AL 
+ 0069  B4 02			             MOV AH,02H 
+ 006B  CD 21			             INT 21H 
+ 006D  B4 4C			             MOV AH,4CH 
+ 006F  B0 00			             MOV AL,0 
+ 0071  CD 21			             INT 21H 
+ 0073				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  9/12/24 14:36:44
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0073	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	0039	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BUFFER . . . . . . . . . . . . .  	L BYTE	0036	DATA
+
+CHECK_UPPER  . . . . . . . . . .  	L NEAR	0031	CODE
+
+LOOP1  . . . . . . . . . . . . .  	L NEAR	0020	CODE
+LOWERCOUNT . . . . . . . . . . .  	L BYTE	0038	DATA
+
+MSG1 . . . . . . . . . . . . . .  	L BYTE	0000	DATA
+MSG2 . . . . . . . . . . . . . .  	L BYTE	0010	DATA
+MSG3 . . . . . . . . . . . . . .  	L BYTE	0023	DATA
+
+NEXT . . . . . . . . . . . . . .  	L NEAR	003B	CODE
+
+PRINT  . . . . . . . . . . . . .  	L NEAR	0065	CODE
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+UPPERCOUNT . . . . . . . . . . .  	L BYTE	0037	DATA
+
+@FILENAME  . . . . . . . . . . .  	TEXT  upper		
+
+
+     61 Source  Lines
+     61 Total   Lines
+     15 Symbols
+
+  51066 + 465478 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

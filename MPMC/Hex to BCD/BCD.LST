@@ -1,0 +1,71 @@
+Microsoft (R) Macro Assembler Version 5.00                  10/8/24 10:46:54
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT 
+ 0000  00			      COUNTER DB 00H 
+ 0001  0AAF			       HEX DW 0AAFH 
+ 0003				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START: 
+ 0000  B8 ---- R		      MOV AX,DATA 
+ 0003  8E D8			      MOV DS,AX 
+ 0005  A1 0001 R		      MOV AX,HEX 
+ 0008  BB 000A				  MOV BX,000AH 
+ 000B  BA 0000			      MOV DX,0000H 
+ 000E  FE 06 0000 R		L:    INC COUNTER 
+ 0012  F7 F3			      DIV BX 
+ 0014  52			      PUSH DX 
+ 0015  3D 0000			      CMP AX,0000H 
+ 0018  BA 0000			      MOV DX,00H 
+ 001B  74 02			      JE EXIT 
+ 001D  EB EF			      JMP L 
+ 001F  8A 0E 0000 R		EXIT: MOV CL, COUNTER 
+ 0023  B5 00			      MOV CH,00H 
+ 0025  5A			L1:   POP DX 
+ 0026  80 C2 30			      ADD DL,30H 
+ 0029  B4 02			      MOV AH,02H 
+ 002B  CD 21			      INT 21H 
+ 002D  E2 F6			      LOOP L1 
+ 002F  B4 4C			   	  MOV AH,4CH 
+ 0031  CD 21			      INT 21H 
+ 0033				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  10/8/24 10:46:54
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0033	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	0003	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+COUNTER  . . . . . . . . . . . .  	L BYTE	0000	DATA
+
+EXIT . . . . . . . . . . . . . .  	L NEAR	001F	CODE
+
+HEX  . . . . . . . . . . . . . .  	L WORD	0001	DATA
+
+L  . . . . . . . . . . . . . . .  	L NEAR	000E	CODE
+L1 . . . . . . . . . . . . . . .  	L NEAR	0025	CODE
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  bcd		
+
+
+     30 Source  Lines
+     30 Total   Lines
+     10 Symbols
+
+  51228 + 465316 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

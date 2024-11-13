@@ -1,0 +1,22 @@
+ASSUME CS:CODE,DS:DATA
+DATA SEGMENT
+	divl DW 7004H
+       divh DW 01C1H
+       NUM2 DW 020CH 
+       QUOTIENT DW ?
+       REMAINDER DW ?
+DATA ENDS
+CODE SEGMENT
+START: 
+       MOV AX,DATA
+       MOV DS,AX
+       MOV AX,divl
+       MOV DX,divh
+       MOV BX,NUM2
+       DIV BX
+       MOV QUOTIENT,AX
+       MOV REMAINDER,DX
+       MOV AH, 4CH
+       INT 21H   
+CODE ENDS
+END START

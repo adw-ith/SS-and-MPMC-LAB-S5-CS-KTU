@@ -1,0 +1,70 @@
+NAME    : ADWAITH RAJ
+CLASS   : S5 CS
+ROLL NO : 5
+
+EXPERIMENT NO - 11
+DIVISION OF A 32-BIT NUMBER WITH A 16-BIT NUMBER
+
+Microsoft (R) Macro Assembler Version 5.00                  8/27/24 10:38:54
+                                                             Page     1-1
+
+
+				ASSUME CS:CODE,DS:DATA 
+ 0000				DATA SEGMENT 
+ 0000  7004				   divl DW 7004H 
+ 0002  01C1			       divh DW 01C1H 
+ 0004  020C			       NUM2 DW 020CH  
+ 0006  ????			       QUOTIENT DW ? 
+ 0008  ????			       REMAINDER DW ? 
+ 000A				DATA ENDS 
+ 0000				CODE SEGMENT 
+ 0000				START:  
+ 0000  B8 ---- R		       MOV AX,DATA 
+ 0003  8E D8			       MOV DS,AX 
+ 0005  A1 0000 R		       MOV AX,divl 
+ 0008  8B 16 0002 R		       MOV DX,divh 
+ 000C  8B 1E 0004 R		       MOV BX,NUM2 
+ 0010  F7 F3			       DIV BX 
+ 0012  A3 0006 R		       MOV QUOTIENT,AX 
+ 0015  89 16 0008 R		       MOV REMAINDER,DX 
+ 0019  B4 4C			       MOV AH, 4CH 
+ 001B  CD 21			       INT 21H    
+ 001D				CODE ENDS 
+				END START 
+Microsoft (R) Macro Assembler Version 5.00                  8/27/24 10:38:54
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	001D	PARA	NONE	
+DATA . . . . . . . . . . . . . .  	000A	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+DIVH . . . . . . . . . . . . . .  	L WORD	0002	DATA
+DIVL . . . . . . . . . . . . . .  	L WORD	0000	DATA
+
+NUM2 . . . . . . . . . . . . . .  	L WORD	0004	DATA
+
+QUOTIENT . . . . . . . . . . . .  	L WORD	0006	DATA
+
+REMAINDER  . . . . . . . . . . .  	L WORD	0008	DATA
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  div		
+
+
+     22 Source  Lines
+     22 Total   Lines
+     10 Symbols
+
+  51228 + 465316 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
